@@ -8,6 +8,7 @@ import { Navbar } from "@/components/loans/Navbar";
 import { FaqSection } from "@/components/loans/FaqSection";
 import { SiteFooter } from "@/components/loans/SiteFooter";
 import { MediaRail } from "@/components/loans/MediaRail";
+import { ConfidenceStrip } from "@/components/loans/ConfidenceStrip";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -48,6 +49,7 @@ export default function RootLayout({
           </a>
           <Navbar />
           {children}
+          <ConfidenceStrip />
           <MediaRail />
           <FaqSection />
           <SiteFooter />
