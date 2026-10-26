@@ -11,6 +11,7 @@ export function CustomSelect({
   options,
   placeholder,
   required,
+  error,
 }: {
   name: string;
   value: string;
@@ -18,6 +19,7 @@ export function CustomSelect({
   options: Option[];
   placeholder: string;
   required?: boolean;
+  error?: string;
 }) {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -39,7 +41,7 @@ export function CustomSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
-        className="flex min-h-[52px] w-full items-center justify-between rounded-xl border border-[#c8dcd8] bg-white px-4 py-3 text-left font-normal outline-none transition-colors focus-visible:border-[#0f766e]"
+        className={`flex min-h-[52px] w-full items-center justify-between rounded-xl border bg-white px-4 py-3 text-left font-normal outline-none transition-[border-color,box-shadow] duration-200 focus-visible:border-[#0f766e] ${error ? "border-[#b3261e]" : "border-[#c8dcd8]"}`}
       >
         <span className={selected ? "text-[#073b3a]" : "text-[#71908b]"}>
           {selected?.label ?? placeholder}
@@ -47,7 +49,7 @@ export function CustomSelect({
         <span aria-hidden className={`text-[#0f766e] transition-transform ${open ? "rotate-180" : ""}`}>⌄</span>
       </button>
       {open && (
-        <div role="listbox" className="absolute left-0 right-0 top-[calc(100%+6px)] z-40 overflow-hidden rounded-xl border border-[#c8dcd8] bg-white p-1 shadow-[0_16px_35px_rgba(7,59,58,.14)]">
+        <div role="listbox" className="select-menu-enter absolute left-0 right-0 top-[calc(100%+6px)] z-40 overflow-hidden rounded-xl border border-[#c8dcd8] bg-white p-1 shadow-[0_16px_35px_rgba(7,59,58,.14)]">
           {options.map((option) => (
             <button
               key={option.value}

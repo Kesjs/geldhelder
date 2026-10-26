@@ -149,7 +149,20 @@ export async function sendRequestEmails(d: {
     },
     `request/${key}/internal`,
   );
-  return internal.ok;
+  const confirmation = await send(
+    {
+      to: d.email,
+      subject: "We hebben je aanvraag ontvangen — GeldHelder",
+      html: wrap(
+        `<h2>Bedankt, ${esc(d.naam)}</h2>
+        <p>We hebben je aanvraag goed ontvangen. Een medewerker bekijkt je gegevens en neemt persoonlijk contact met je op.</p>
+        ${rows([["Leendoel", d.categorie], ["Bedrag / looptijd", d.pakket]])}
+        <p style="margin-top:20px;color:#686878;font-size:13px">Dit bericht is alleen een ontvangstbevestiging. Een aanvraag is geen garantie op acceptatie.</p>`,
+      ),
+    },
+    `request/${key}/confirmation`,
+  );
+  return internal.ok && confirmation.ok;
 }
 
 export async function sendPaymentEmails(d: {
