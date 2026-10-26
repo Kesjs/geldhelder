@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { LoanForm } from "@/components/loans/LoanForm";
+
+export default function ApplyPage(){return <main className="min-h-screen bg-[#f7fbfa] text-[#073b3a]"><div className="mx-auto max-w-5xl px-5 py-10 lg:px-8"><Link href="/" className="text-2xl font-bold">Geld<span className="text-[#0f766e]">Helder</span></Link><div className="mt-20 grid gap-12 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-sm font-bold uppercase tracking-[.2em] text-[#0f766e]">Persoonlijke aanvraag</p><h1 className="mt-4 text-5xl font-bold leading-[.98] tracking-[-.06em]">Vertel ons wat je nodig hebt.</h1><p className="mt-6 text-lg leading-8 text-[#637b78]">Vul je gegevens rustig in. Een medewerker neemt je aanvraag door en neemt persoonlijk contact met je op.</p><Link href="/" className="mt-8 inline-block font-semibold text-[#0f766e]">← Terug naar GeldHelder</Link></div><LoanForm /></div></div></main>}
