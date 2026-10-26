@@ -5,10 +5,8 @@ import "@fontsource/inter/latin-700.css";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/loans/Navbar";
-import { FaqSection } from "@/components/loans/FaqSection";
 import { SiteFooter } from "@/components/loans/SiteFooter";
-import { MediaRail } from "@/components/loans/MediaRail";
-import { ConfidenceStrip } from "@/components/loans/ConfidenceStrip";
+import { HomeOnlyExtras } from "@/components/loans/HomeOnlyExtras";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -49,9 +47,7 @@ export default function RootLayout({
           </a>
           <Navbar />
           {children}
-          <ConfidenceStrip />
-          <MediaRail />
-          <FaqSection />
+          <HomeOnlyExtras />
           <SiteFooter />
           {process.env.BUSINESS_DETAILS_VERIFIED === "true" && (
             <script
