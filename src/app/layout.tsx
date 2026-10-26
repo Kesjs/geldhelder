@@ -4,7 +4,7 @@ import "@fontsource/inter/latin-500.css";
 import "@fontsource/inter/latin-700.css";
 import "./globals.css";
 import { site } from "@/data/site";
-import { LoanDropdownBar } from "@/components/loans/LoanDropdownBar";
+import { Navbar } from "@/components/loans/Navbar";
 import { FaqSection } from "@/components/loans/FaqSection";
 import { SiteFooter } from "@/components/loans/SiteFooter";
 import { MediaRail } from "@/components/loans/MediaRail";
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   description:
     "Een helder overzicht van je leenmogelijkheden en een persoonlijke aanvraag in Nederland.",
   icons: {
-    icon: [{ url: "/brand/stuurvast-logo-mark.png", type: "image/png" }],
-    apple: "/brand/stuurvast-logo-mark.png",
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: "/icon.svg",
   },
   openGraph: { type: "website", locale: "nl_NL", siteName: "GeldHelder" },
 };
@@ -46,7 +46,7 @@ export default function RootLayout({
         >
           Ga naar de inhoud
           </a>
-          <LoanDropdownBar />
+          <Navbar />
           {children}
           <MediaRail />
           <FaqSection />
