@@ -5,6 +5,9 @@ import "@fontsource/inter/latin-700.css";
 import "./globals.css";
 import { site } from "@/data/site";
 import { LoanDropdownBar } from "@/components/loans/LoanDropdownBar";
+import { FaqSection } from "@/components/loans/FaqSection";
+import { SiteFooter } from "@/components/loans/SiteFooter";
+import { MediaRail } from "@/components/loans/MediaRail";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -45,6 +48,9 @@ export default function RootLayout({
           </a>
           <LoanDropdownBar />
           {children}
+          <MediaRail />
+          <FaqSection />
+          <SiteFooter />
           {process.env.BUSINESS_DETAILS_VERIFIED === "true" && (
             <script
               type="application/ld+json"
