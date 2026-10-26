@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   description:
     "Een helder overzicht van je leenmogelijkheden en een persoonlijke aanvraag in Nederland.",
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: "/icon.svg",
+    icon: [{ url: "/brand/geldhelder-symbol.png", type: "image/png" }],
+    apple: "/brand/geldhelder-symbol.png",
   },
   openGraph: { type: "website", locale: "nl_NL", siteName: "GeldHelder" },
 };

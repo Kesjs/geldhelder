@@ -39,7 +39,7 @@ export function CustomSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
-        className="flex min-h-[52px] w-full items-center justify-between rounded-xl border border-[#c8dcd8] bg-white px-4 py-3 text-left font-normal outline-none transition-[border-color,box-shadow] focus-visible:border-[#0f766e] focus-visible:ring-2 focus-visible:ring-[#0f766e]/20"
+        className="flex min-h-[52px] w-full items-center justify-between rounded-xl border border-[#c8dcd8] bg-white px-4 py-3 text-left font-normal outline-none transition-colors focus-visible:border-[#0f766e]"
       >
         <span className={selected ? "text-[#073b3a]" : "text-[#71908b]"}>
           {selected?.label ?? placeholder}
