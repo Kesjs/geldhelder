@@ -27,7 +27,7 @@ const toestemming = z.literal(true, {
 });
 
 export const requestSchema = z.object({
-  type: z.enum(["reservering", "contact"]),
+  type: z.enum(["reservering", "contact", "lening"]),
   naam,
   email,
   telefoon: telefoon.optional().default(""),

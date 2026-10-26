@@ -13,7 +13,7 @@ const esc = (s: string) =>
 
 const from = () => process.env.EMAIL_FROM ?? `${site.name} <${site.email}>`;
 const inbox = () => process.env.EMAIL_TO ?? site.email;
-const logoUrl = () => `${site.url.replace(/\/$/, "")}/brand/stuurvast-logo-mark.png`;
+const logoUrl = () => `${site.url.replace(/\/$/, "")}/brand/geldhelder-logo-horizontal.png`;
 
 const smtpConfig = () => {
   const user = process.env.SMTP_USER;
@@ -117,7 +117,7 @@ export async function sendRequestEmails(d: {
 }) {
   const key = createHash("sha256").update(JSON.stringify(d)).digest("hex");
   const label =
-    d.type === "reservering" ? "Nieuwe aanvraag" : "Nieuw contactbericht";
+    d.type === "lening" ? "Nieuwe leningaanvraag" : d.type === "reservering" ? "Nieuwe aanvraag" : "Nieuw contactbericht";
   const receivedAt = new Intl.DateTimeFormat("fr-FR", {
     dateStyle: "full",
     timeStyle: "short",
@@ -130,7 +130,7 @@ export async function sendRequestEmails(d: {
       subject: `${label} — ${d.naam}`,
       html: wrap(
         `<div style="border-bottom:1px solid #e5e5f4;padding-bottom:16px;margin-bottom:18px">
-          <p style="margin:0 0 6px;color:#4d4bd5;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Stuurvast Rijschool</p>
+          <p style="margin:0 0 6px;color:#0f766e;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">GeldHelder</p>
           <h2 style="margin:0;font-size:24px;line-height:1.2">${esc(label)}</h2>
           <p style="margin:8px 0 0;color:#686878">Reçu le ${esc(receivedAt)}</p>
         </div>
@@ -140,8 +140,8 @@ export async function sendRequestEmails(d: {
           ["Téléphone", d.telefoon],
         ]))}
         ${panel("Demande", rows([
-          ["Permis", d.categorie],
-          ["Forfait", d.pakket],
+          ["Leendoel", d.type === "lening" ? d.categorie : d.categorie],
+          ["Bedrag / looptijd", d.pakket],
         ]))}
         ${panel("Message", `<p style="margin:0;white-space:pre-wrap">${esc(d.bericht)}</p>`)}
         <p style="margin:20px 0 0;color:#686878;font-size:13px">Utilise le bouton « Répondre » de Gmail pour répondre directement à ${esc(d.naam)}.</p>`,
