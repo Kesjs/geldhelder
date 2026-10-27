@@ -1,7 +1,7 @@
 export const site = {
   name: "GeldHelder",
   tagline: "Duidelijke informatie voor je financiële keuze",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://geldhelder.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://geldhelderadvies.nl",
   address: "Nederland",
   street: "",
   postalCode: "",
