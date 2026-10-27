@@ -6,6 +6,13 @@ import { CustomSelect } from "./CustomSelect";
 const purposes = ["Persoonlijke uitgaven", "Auto", "Verbouwing", "Verduurzaming", "Schulden samenvoegen"].map((value) => ({ value, label: value }));
 const amounts = [5000, 10000, 15000, 25000, 35000, 50000].map((x) => ({ value: `€ ${x.toLocaleString("nl-NL")}`, label: `€ ${x.toLocaleString("nl-NL")}` }));
 const terms = ["36 maanden", "60 maanden", "84 maanden", "120 maanden"].map((value) => ({ value, label: value }));
+const dutchErrors: Record<string, string> = {
+  "Vul je naam in.": "Vul je naam in.",
+  "Vul een geldig e-mailadres in.": "Vul een geldig e-mailadres in.",
+  "Vul een geldig telefoonnummer in.": "Vul een geldig telefoonnummer in.",
+  "Geef toestemming om je gegevens te verwerken.": "Geef toestemming om je gegevens te verwerken.",
+  "Vul een geldig rijbewijs in.": "Kies een geldig leendoel.",
+};
 
 export function LoanForm() {
   const [sent, setSent] = useState(false);
@@ -22,7 +29,7 @@ export function LoanForm() {
     try {
       const r = await fetch("/api/aanvraag", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(form)) });
       const data = await r.json().catch(() => ({}));
-      if (r.status === 422) { setErrors(data.errors ?? {}); setError("Controleer les champs indiqués ci-dessous."); return; }
+      if (r.status === 422) { const keys: Record<string, string> = { naam: "name", telefoon: "phone", categorie: "purpose", pakket: "amount", bericht: "message" }; setErrors(Object.fromEntries(Object.entries(data.errors ?? {}).map(([key, value]) => [keys[key] ?? key, dutchErrors[String(value)] ?? String(value).replace("Schrijf een kort bericht.", "Schrijf kort iets over je aanvraag.")]))); setError("Controleer de gemarkeerde velden hieronder."); return; }
       if (!r.ok) throw new Error(data.error ?? "Verzenden mislukt.");
       setSent(true);
     } catch (x) { setError(x instanceof Error ? x.message : "Verzenden mislukt."); }

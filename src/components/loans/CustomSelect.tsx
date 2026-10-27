@@ -41,7 +41,7 @@ export function CustomSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
-        className={`flex min-h-[52px] w-full items-center justify-between rounded-xl border bg-white px-4 py-3 text-left font-normal outline-none transition-[border-color,box-shadow] duration-200 focus-visible:border-[#0f766e] ${error ? "border-[#b3261e]" : "border-[#c8dcd8]"}`}
+        className={`loan-select-trigger flex min-h-[52px] w-full items-center justify-between rounded-xl border bg-white px-4 py-3 text-left font-normal outline-none transition-[border-color,box-shadow] duration-200 focus-visible:border-[#0f766e] ${error ? "border-[#b3261e]" : "border-[#c8dcd8]"}`}
       >
         <span className={selected ? "text-[#073b3a]" : "text-[#71908b]"}>
           {selected?.label ?? placeholder}
@@ -56,7 +56,8 @@ export function CustomSelect({
               type="button"
               role="option"
               aria-selected={value === option.value}
-              onClick={() => { onChange(option.value); setOpen(false); }}
+              onPointerDown={(event) => { event.preventDefault(); onChange(option.value); setOpen(false); }}
+              onClick={() => setOpen(false)}
               className={`block w-full rounded-lg px-3 py-2.5 text-left text-sm transition-colors hover:bg-[#eef7f5] ${value === option.value ? "bg-[#eef7f5] font-semibold text-[#0f766e]" : "text-[#073b3a]"}`}
             >
               {option.label}
