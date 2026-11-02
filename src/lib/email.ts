@@ -47,8 +47,10 @@ async function send(
       });
       return { ok: true as const };
     } catch {
-      console.error("[email] SMTP-verzending mislukt");
-      return { ok: false as const };
+      // Keep Resend as a delivery fallback. This matters during provider
+      // migrations: a stale Hostinger password must not mask a valid Resend
+      // configuration already present in production.
+      console.error("[email] SMTP-verzending mislukt; probeer Resend");
     }
   }
 
