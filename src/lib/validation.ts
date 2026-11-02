@@ -26,7 +26,7 @@ const toestemming = z.literal(true, {
   }),
 });
 
-export const requestSchema = z.object({
+const requestFields = z.object({
   type: z.enum(["reservering", "contact", "lening"]),
   naam,
   email,
@@ -34,19 +34,11 @@ export const requestSchema = z.object({
   categorie: z
     .string()
     .trim()
-    .refine(
-      (v) => v === "" || licenseCategories.some((c) => c.code === v),
-      "Kies een geldig rijbewijs.",
-    )
     .optional()
     .default(""),
   pakket: z
     .string()
     .trim()
-    .refine(
-      (v) => v === "" || packages.some((p) => p.name === v),
-      "Kies een geldig pakket.",
-    )
     .optional()
     .default(""),
   bericht: z
@@ -58,6 +50,18 @@ export const requestSchema = z.object({
   // anti-spam
   website: z.string().max(0).optional().default(""),
   startedAt: z.number().optional(),
+});
+export const requestSchema = requestFields.superRefine((value, ctx) => {
+  // The GeldHelder loan form uses its own purpose and amount lists; they are
+  // intentionally different from the driving-school catalog values retained
+  // for the older reservation/contact flow.
+  if (value.type === "lening") return;
+  if (value.categorie && !licenseCategories.some((c) => c.code === value.categorie)) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["categorie"], message: "Kies een geldig rijbewijs." });
+  }
+  if (value.pakket && !packages.some((p) => p.name === value.pakket)) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["pakket"], message: "Kies een geldig pakket." });
+  }
 });
 export type RequestInput = z.infer<typeof requestSchema>;
 

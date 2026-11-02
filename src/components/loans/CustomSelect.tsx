@@ -46,7 +46,18 @@ export function CustomSelect({
         <span className={selected ? "text-[#073b3a]" : "text-[#71908b]"}>
           {selected?.label ?? placeholder}
         </span>
-        <span aria-hidden className={`text-[#0f766e] transition-transform ${open ? "rotate-180" : ""}`}>⌄</span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          className={`h-4 w-4 shrink-0 text-[#0f766e] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        >
+          <path d="m3.5 6 4.5 4 4.5-4" />
+        </svg>
       </button>
       {open && (
         <div role="listbox" className="select-menu-enter absolute left-0 right-0 top-[calc(100%+6px)] z-40 overflow-hidden rounded-xl border border-[#c8dcd8] bg-white p-1 shadow-[0_16px_35px_rgba(7,59,58,.14)]">
